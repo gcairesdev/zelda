@@ -6,7 +6,7 @@ from player import Player
 class Level:
     def __init__(self):
         self.displaySurface = pygame.display.get_surface()
-        self.visibleSprites = pygame.sprite.Group()
+        self.visibleSprites = YSortCameraGroup()
         self.obstaclesSprites = pygame.sprite.Group()
         self.createMap()
 
@@ -21,5 +21,21 @@ class Level:
                     self.player = Player((x, y), [self.visibleSprites], self.obstaclesSprites)
 
     def run(self):
-        self.visibleSprites.draw(self.displaySurface)
+        self.visibleSprites.customDraw(self.player)
         self.visibleSprites.update()
+
+class YSortCameraGroup(pygame.sprite.Group):
+    def __init__(self):
+        super().__init__()
+        self.displaySurface = pygame.display.get_surface()
+        self.halfWidth = self.displaySurface.get_size()[0] // 2
+        self.halfHeight = self.displaySurface.get_size()[1] // 2
+        self.offset = pygame.math.Vector2()
+
+    def customDraw(self, player):
+        self.offset.x = player.rect.centerx - self.halfWidth
+        self.offset.y = player.rect.centery - self.halfHeight
+
+        for sprite in self.sprites():
+            offsetPosition = sprite.rect.topleft - self.offset
+            self.displaySurface.blit(sprite.image, offsetPosition)
