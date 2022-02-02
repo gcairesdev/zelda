@@ -36,6 +36,6 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.offset.x = player.rect.centerx - self.halfWidth
         self.offset.y = player.rect.centery - self.halfHeight
 
-        for sprite in self.sprites():
+        for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery):
             offsetPosition = sprite.rect.topleft - self.offset
             self.displaySurface.blit(sprite.image, offsetPosition)
