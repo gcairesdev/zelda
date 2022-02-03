@@ -1,3 +1,5 @@
+import os
+import pygame
 from csv import reader
 
 def importCsvLayout(path):
@@ -7,3 +9,13 @@ def importCsvLayout(path):
         for row in layout:
             terrainMap.append(list(row))
         return terrainMap
+
+def importImagesFrom(path):
+    surfaceList = []
+
+    for filename in sorted(os.listdir(path)):
+        fullPath = path + '/' + filename
+        imageSurf = pygame.image.load(fullPath).convert_alpha()
+        surfaceList.append(imageSurf)
+
+    return surfaceList

@@ -1,6 +1,7 @@
 import pygame
 from settings import *
 from support import *
+from random import choice
 from tile import Tile
 from player import Player
 
@@ -14,19 +15,30 @@ class Level:
     def createMap(self):
         layouts = {
             'bondary': importCsvLayout('./src/map/mapFloorBlocks.csv'),
+            'grass': importCsvLayout('./src/map/mapGrass.csv'),
+            'object': importCsvLayout('./src/map/mapObjects.csv'),
+        }
+        graphics = {
+            'grass': importImagesFrom('./src/img/grass'),
+            'objects': importImagesFrom('./src/img/objects'),
         }
 
         for style, layout in layouts.items():
             for rowIndex, row in enumerate(layout):
                 for colIndex, col in enumerate(row):
-                    if col != '-1':
+                    if col != '0' and col != '':
                         x = colIndex * TILE_SIZE
                         y = rowIndex * TILE_SIZE
                         if style == 'bondary':
                             Tile((x, y), [self.obstaclesSprites], 'invisible')
+                        if style == 'grass':
+                            randomGrassImg = choice(graphics['grass'])
+                            Tile((x, y), [self.visibleSprites, self.obstaclesSprites], 'grass', randomGrassImg)
+                        if style == 'object':
+                            surface = graphics['objects'][int(col)]
+                            Tile((x, y), [self.visibleSprites, self.obstaclesSprites], 'object', surface)
 
         self.player = Player((2000, 1430), [self.visibleSprites], self.obstaclesSprites)
-
 
     def run(self):
         self.visibleSprites.customDraw(self.player)
