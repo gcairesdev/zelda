@@ -3,7 +3,7 @@ from support import *
 from settings import *
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, position, groups, obstaclesSprites):
+    def __init__(self, position, groups, obstaclesSprites, createAttack, destroyAttack):
         super().__init__(groups)
         self.image = pygame.image.load('./src/img/player.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = position)
@@ -18,6 +18,12 @@ class Player(pygame.sprite.Sprite):
         self.attackCooldown = 400
         self.atackTime = None
         self.obstaclesSprites = obstaclesSprites
+
+        # weapon
+        self.createAttack = createAttack
+        self.destroyAttack = destroyAttack
+        self.weaponIndex = 0
+        self.weapon = list(WEAPON_DATA.keys())[self.weaponIndex]
 
     def importPlayerAssets(self):
         characterPath = './src/img/player/'
@@ -56,6 +62,7 @@ class Player(pygame.sprite.Sprite):
             if keys[pygame.K_SPACE]:
                 self.attacking = True
                 self.atackTime = pygame.time.get_ticks()
+                self.createAttack()
 
             if keys[pygame.K_LCTRL]:
                 self.attacking = True
@@ -110,6 +117,7 @@ class Player(pygame.sprite.Sprite):
         if self.attacking:
             if currentTime - self.atackTime >= self.attackCooldown:
                 self.attacking = False
+                self.destroyAttack()
 
     def animate(self):
         animation = self.animations[self.status]
