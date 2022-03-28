@@ -2,11 +2,12 @@ import pygame
 from support import *
 from settings import *
 
+
 class Player(pygame.sprite.Sprite):
     def __init__(self, position, groups, obstaclesSprites, createAttack, destroyAttack):
         super().__init__(groups)
         self.image = pygame.image.load('./src/img/player.png').convert_alpha()
-        self.rect = self.image.get_rect(topleft = position)
+        self.rect = self.image.get_rect(topleft=position)
         self.hitbox = self.rect.inflate(0, -26)
         self.importPlayerAssets()
         self.status = 'down'
@@ -145,7 +146,7 @@ class Player(pygame.sprite.Sprite):
             self.frameIndex = 0
 
         self.image = animation[int(self.frameIndex)]
-        self.rect = self.image.get_rect(center = self.hitbox.center)
+        self.rect = self.image.get_rect(center=self.hitbox.center)
 
     def update(self):
         self.input()

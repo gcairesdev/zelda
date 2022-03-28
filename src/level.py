@@ -6,6 +6,7 @@ from tile import Tile
 from player import Player
 from weapon import Weapon
 
+
 class Level:
     def __init__(self):
         self.displaySurface = pygame.display.get_surface()
@@ -38,12 +39,15 @@ class Level:
                             Tile((x, y), [self.obstaclesSprites], 'invisible')
                         if style == 'grass':
                             randomGrassImg = choice(graphics['grass'])
-                            Tile((x, y), [self.visibleSprites, self.obstaclesSprites], 'grass', randomGrassImg)
+                            Tile(
+                                (x, y), [self.visibleSprites, self.obstaclesSprites], 'grass', randomGrassImg)
                         if style == 'object':
                             surface = graphics['objects'][int(col)]
-                            Tile((x, y), [self.visibleSprites, self.obstaclesSprites], 'object', surface)
+                            Tile(
+                                (x, y), [self.visibleSprites, self.obstaclesSprites], 'object', surface)
 
-        self.player = Player((2000, 1430), [self.visibleSprites], self.obstaclesSprites, self.createAttack, self.destroyAttack)
+        self.player = Player((2000, 1430), [
+                             self.visibleSprites], self.obstaclesSprites, self.createAttack, self.destroyAttack)
 
     def createAttack(self):
         self.currentAttack = Weapon(self.player, [self.visibleSprites])
@@ -57,6 +61,7 @@ class Level:
         self.visibleSprites.customDraw(self.player)
         self.visibleSprites.update()
 
+
 class YSortCameraGroup(pygame.sprite.Group):
     def __init__(self):
         super().__init__()
@@ -64,8 +69,9 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.halfWidth = self.displaySurface.get_size()[0] // 2
         self.halfHeight = self.displaySurface.get_size()[1] // 2
         self.offset = pygame.math.Vector2()
-        self.floorSurface = pygame.image.load('./src/img/tilemap/ground.png').convert()
-        self.floorRect = self.floorSurface.get_rect(topleft = (0, 0))
+        self.floorSurface = pygame.image.load(
+            './src/img/tilemap/ground.png').convert()
+        self.floorRect = self.floorSurface.get_rect(topleft=(0, 0))
 
     def customDraw(self, player):
         self.offset.x = player.rect.centerx - self.halfWidth
@@ -74,6 +80,6 @@ class YSortCameraGroup(pygame.sprite.Group):
         floorOffsetPosition = self.floorRect.topleft - self.offset
         self.displaySurface.blit(self.floorSurface, floorOffsetPosition)
 
-        for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery):
+        for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery):
             offsetPosition = sprite.rect.topleft - self.offset
             self.displaySurface.blit(sprite.image, offsetPosition)
