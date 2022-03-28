@@ -14,6 +14,13 @@ class UI:
         self.energyBarRect = pygame.Rect(
             10, 34, UI_ENERGY_BAR_WIDTH, UI_BAR_HEIGHT)
 
+        # convert weapon dictionary
+        self.weaponGraphics = []
+        for weapon in WEAPON_DATA.values():
+            path = weapon['graphic']
+            weapon = pygame.image.load(path).convert_alpha()
+            self.weaponGraphics.append(weapon)
+
     def showBar(self, current, maxAmount, bgRect, color):
         # draw background
         pygame.draw.rect(self.displaySurface, UI_BG_COLOR, bgRect)
@@ -40,9 +47,29 @@ class UI:
         pygame.draw.rect(self.displaySurface, UI_BORDER_COLOR,
                          textRect.inflate(8, 8), 3)
 
+    def selectionBox(self, left, top, hasSwitched):
+        bgRect = pygame.Rect(left, top, UI_ITEM_BOX_SIZE, UI_ITEM_BOX_SIZE)
+        pygame.draw.rect(self.displaySurface, UI_BG_COLOR, bgRect)
+        if not hasSwitched:
+            pygame.draw.rect(self.displaySurface, UI_BORDER_COLOR_ACTIVE,
+                             bgRect, 3)
+        else:
+            pygame.draw.rect(self.displaySurface, UI_BORDER_COLOR, bgRect, 3)
+        return bgRect
+
+    def weaponOverlay(self, weaponIndex, hasSwitched):
+        bgRect = self.selectionBox(10, 630, hasSwitched)
+        weaponSurf = self.weaponGraphics[weaponIndex]
+        weaponRect = weaponSurf.get_rect(center=bgRect.center)
+
+        self.displaySurface.blit(weaponSurf, weaponRect)
+
     def display(self, player):
         self.showBar(player.health, player.stats['health'],
                      self.healthBarRect, UI_HEALTH_COLOR)
         self.showBar(player.energy, player.stats['energy'],
                      self.energyBarRect, UI_ENERGY_COLOR)
         self.showExp(player.exp)
+
+        self.weaponOverlay(player.weaponIndex, player.canSwitchWeapon)
+        # self.selectionBox(80, 635)
