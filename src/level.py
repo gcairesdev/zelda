@@ -50,11 +50,20 @@ class Level:
                             Tile(
                                 (x, y), [self.visibleSprites, self.obstaclesSprites], 'object', surface)
 
-        self.player = Player((2000, 1430), [
-                             self.visibleSprites], self.obstaclesSprites, self.createAttack, self.destroyAttack)
+        self.player = Player(
+            (2000, 1430),
+            [self.visibleSprites],
+            self.obstaclesSprites,
+            self.createAttack,
+            self.destroyAttack,
+            self.createMagic
+        )
 
     def createAttack(self):
         self.currentAttack = Weapon(self.player, [self.visibleSprites])
+
+    def createMagic(self, style, strength, cost):
+        pass
 
     def destroyAttack(self):
         if self.currentAttack:
