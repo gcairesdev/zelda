@@ -24,6 +24,9 @@ class Player(pygame.sprite.Sprite):
         self.destroyAttack = destroyAttack
         self.weaponIndex = 0
         self.weapon = list(WEAPON_DATA.keys())[self.weaponIndex]
+        self.canSwitchWeapon = True
+        self.weaponSwitchTime = None
+        self.switchDurationCooldown = 200
 
     def importPlayerAssets(self):
         characterPath = './src/img/player/'
@@ -67,6 +70,17 @@ class Player(pygame.sprite.Sprite):
             if keys[pygame.K_LCTRL]:
                 self.attacking = True
                 self.atackTime = pygame.time.get_ticks()
+
+            if keys[pygame.K_q] and self.canSwitchWeapon:
+                self.canSwitchWeapon = False
+                self.weaponSwitchTime = pygame.time.get_ticks()
+
+                if self.weaponIndex < len(list(WEAPON_DATA.keys())) - 1:
+                    self.weaponIndex += 1
+                else:
+                    self.weaponIndex = 0
+
+                self.weapon = list(WEAPON_DATA.keys())[self.weaponIndex]
 
     def setStatus(self):
         if self.direction.x == 0 and self.direction.y == 0:
@@ -118,6 +132,10 @@ class Player(pygame.sprite.Sprite):
             if currentTime - self.atackTime >= self.attackCooldown:
                 self.attacking = False
                 self.destroyAttack()
+
+        if not self.canSwitchWeapon:
+            if currentTime - self.weaponSwitchTime >= self.switchDurationCooldown:
+                self.canSwitchWeapon = True
 
     def animate(self):
         animation = self.animations[self.status]
