@@ -1,9 +1,10 @@
 import pygame
+from entity import Entity
 from support import *
 from settings import *
 
 
-class Player(pygame.sprite.Sprite):
+class Player(Entity):
     def __init__(self, position, groups, obstaclesSprites, createAttack, destroyAttack, createMagic):
         super().__init__(groups)
         self.image = pygame.image.load('./src/img/player.png').convert_alpha()
@@ -11,9 +12,6 @@ class Player(pygame.sprite.Sprite):
         self.hitbox = self.rect.inflate(0, -26)
         self.importPlayerAssets()
         self.status = 'down'
-        self.frameIndex = 0
-        self.animationSpeed = 0.15
-        self.direction = pygame.math.Vector2()
         self.attacking = False
         self.attackCooldown = 400
         self.atackTime = None
@@ -136,33 +134,6 @@ class Player(pygame.sprite.Sprite):
         else:
             if 'attack' in self.status:
                 self.status = self.status.replace('_attack', '')
-
-    def move(self, speed):
-        if self.direction.magnitude() != 0:
-            self.direction = self.direction.normalize()
-
-        self.hitbox.x += self.direction.x * speed
-        self.colission('horizontal')
-        self.hitbox.y += self.direction.y * speed
-        self.colission('vertical')
-        self.rect.center = self.hitbox.center
-
-    def colission(self, direction):
-        if direction == 'horizontal':
-            for sprite in self.obstaclesSprites:
-                if sprite.hitbox.colliderect(self.hitbox):
-                    if self.direction.x > 0:
-                        self.hitbox.right = sprite.hitbox.left
-                    if self.direction.x < 0:
-                        self.hitbox.left = sprite.hitbox.right
-
-        if direction == 'vertical':
-            for sprite in self.obstaclesSprites:
-                if sprite.hitbox.colliderect(self.hitbox):
-                    if self.direction.y > 0:
-                        self.hitbox.bottom = sprite.hitbox.top
-                    if self.direction.y < 0:
-                        self.hitbox.top = sprite.hitbox.bottom
 
     def cooldowns(self):
         currentTime = pygame.time.get_ticks()
