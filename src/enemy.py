@@ -6,7 +6,6 @@ from entity import Entity
 
 class Enemy(Entity):
     def __init__(self, enemyName, position, groups, obstaclesSprites):
-
         # general setup
         super().__init__(groups)
         self.spriteType = 'enemy'
@@ -51,7 +50,6 @@ class Enemy(Entity):
 
         return (distance, direction)
 
-
     def getStatus(self, player):
         distance = self.getPlayerDistanceAndDirection(player)[0]
 
@@ -70,8 +68,19 @@ class Enemy(Entity):
         else:
             self.direction = pygame.math.Vector2()
 
+    def animate(self):
+        animation = self.animations[self.status]
+
+        self.frameIndex += self.animationSpeed
+        if self.frameIndex >= len(animation):
+            self.frameIndex = 0
+
+        self.image = animation[int(self.frameIndex)]
+        self.rect = self.image.get_rect(center=self.hitbox.center)
+
     def update(self):
         self.move(self.speed)
+        self.animate()
 
     def enemyUpdate(self, player):
         self.getStatus(player)
