@@ -169,6 +169,12 @@ class Player(Entity):
         self.image = animation[int(self.frameIndex)]
         self.rect = self.image.get_rect(center=self.hitbox.center)
 
+        if not self.vulnerable:
+            alpha = self.waveValue()
+        else:
+            alpha = 255
+        self.image.set_alpha(alpha)
+
     def getFullWeaponDamage(self):
         baseDamage = self.stats['attack']
         weaponDamage = WEAPON_DATA[self.weapon]['damage']
