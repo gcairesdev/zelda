@@ -92,6 +92,13 @@ class Enemy(Entity):
         self.image = animation[int(self.frameIndex)]
         self.rect = self.image.get_rect(center=self.hitbox.center)
 
+        if not self.vunarable:
+            alpha = self.waveValue()
+        else:
+            alpha = 255
+        self.image.set_alpha(alpha)
+
+
     def cooldowns(self):
         currentTime = pygame.time.get_ticks()
 
