@@ -5,7 +5,7 @@ from entity import Entity
 
 
 class Enemy(Entity):
-    def __init__(self, enemyName, position, groups, obstaclesSprites):
+    def __init__(self, enemyName, position, groups, obstaclesSprites, damagePlayer):
         # general setup
         super().__init__(groups)
         self.spriteType = 'enemy'
@@ -36,6 +36,7 @@ class Enemy(Entity):
         self.canAttack = True
         self.attackTime = None
         self.attackCooldown = 400
+        self.damagePlayer = damagePlayer
 
         # invencibility timer
         self.vunarable = True
@@ -75,6 +76,7 @@ class Enemy(Entity):
     def actions(self, player):
         if self.status == 'attack':
             self.attackTime = pygame.time.get_ticks()
+            self.damagePlayer(self.attackDamage, self.attackType)
         elif self.status == 'move':
             self.direction = self.getPlayerDistanceAndDirection(player)[1]
         else:

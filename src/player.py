@@ -46,6 +46,11 @@ class Player(Entity):
         self.speed = self.stats['speed']
         self.exp = 123
 
+        # damage timer
+        self.vulnerable = True
+        self.hurtTime = None
+        self.invunerabilityDuration = 500
+
     def importPlayerAssets(self):
         characterPath = './src/img/player/'
         self.animations = {
@@ -149,6 +154,10 @@ class Player(Entity):
         if not self.canSwitchMagic:
             if currentTime - self.magicSwitchTime >= self.switchDurationCooldown:
                 self.canSwitchMagic = True
+
+        if not self.vulnerable:
+            if currentTime - self.hurtTime >= self.invunerabilityDuration:
+                self.vulnerable = True
 
     def animate(self):
         animation = self.animations[self.status]

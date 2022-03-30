@@ -85,7 +85,8 @@ class Level:
                                     enemyName,
                                     (x, y),
                                     [self.visibleSprites, self.attackableSprites],
-                                    self.obstaclesSprites
+                                    self.obstaclesSprites,
+                                    self.damagePlayer
                                 )
 
     def createAttack(self):
@@ -112,6 +113,12 @@ class Level:
                             targetSprite.kill()
                         else:
                             targetSprite.getDamage(self.player, attackSprite.spriteType)
+
+    def damagePlayer(self, ammount, attackType):
+        if self.player.vulnerable:
+            self.player.health -= ammount
+            self.player.vulnerable = False
+            self.player.hurtTime = pygame.time.get_ticks()
 
     def run(self):
         self.visibleSprites.customDraw(self.player)
