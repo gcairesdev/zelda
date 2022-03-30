@@ -105,6 +105,7 @@ class Enemy(Entity):
 
     def getDamage(self, player, attackType):
         if self.vunarable:
+            self.direction = self.getPlayerDistanceAndDirection(player)[1]
             if attackType == 'weapon':
                 self.health -= player.getFullWeaponDamage()
             else:
@@ -119,7 +120,12 @@ class Enemy(Entity):
         if self.health <= 0:
             self.kill()
 
+    def hitReaction(self):
+        if not self.vunarable:
+            self.direction *= -self.resistance
+
     def update(self):
+        self.hitReaction()
         self.move(self.speed)
         self.animate()
         self.cooldowns()
