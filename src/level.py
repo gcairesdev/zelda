@@ -105,10 +105,13 @@ class Level:
     def playerAttackLogic(self):
         if self.attackSprites:
             for attackSprite in self.attackSprites:
-                collisionSprites = pygame.sprite.spritecollide(attackSprite, self.attackableSprites, True)
+                collisionSprites = pygame.sprite.spritecollide(attackSprite, self.attackableSprites, False)
                 if collisionSprites:
                     for targetSprite in collisionSprites:
-                        targetSprite.kill()
+                        if targetSprite.spriteType == 'grass':
+                            targetSprite.kill()
+                        else:
+                            targetSprite.getDamage(self.player, attackSprite.spriteType)
 
     def run(self):
         self.visibleSprites.customDraw(self.player)

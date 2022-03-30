@@ -37,6 +37,11 @@ class Enemy(Entity):
         self.attackTime = None
         self.attackCooldown = 400
 
+        # invencibility timer
+        self.vunarable = True
+        self.hitTime = None
+        self.invencibilityCooldown = 300
+
     def importGraphics(self, name):
         self.animations = {'idle': [], 'move': [], 'attack': []}
         mainPath = f'./src/img/enemies/{name}/'
@@ -87,16 +92,37 @@ class Enemy(Entity):
         self.image = animation[int(self.frameIndex)]
         self.rect = self.image.get_rect(center=self.hitbox.center)
 
-    def cooldown(self):
+    def cooldowns(self):
+        currentTime = pygame.time.get_ticks()
+
         if not self.canAttack:
-            currentTime = pygame.time.get_ticks()
             if currentTime - self.attackTime >= self.attackCooldown:
                 self.canAttack = True
+
+        if not self.vunarable:
+            if currentTime - self.hitTime >= self.invencibilityCooldown:
+                self.vunarable = True
+
+    def getDamage(self, player, attackType):
+        if self.vunarable:
+            if attackType == 'weapon':
+                self.health -= player.getFullWeaponDamage()
+            else:
+                # magic damage
+                pass
+            self.hitTime = pygame.time.get_ticks()
+            self.vunarable = False
+
+        self.checkDeath()
+
+    def checkDeath(self):
+        if self.health <= 0:
+            self.kill()
 
     def update(self):
         self.move(self.speed)
         self.animate()
-        self.cooldown()
+        self.cooldowns()
 
     def enemyUpdate(self, player):
         self.getStatus(player)
