@@ -1,12 +1,13 @@
 import pygame
 from settings import *
 from support import *
-from random import choice
+from random import choice, randint
 from tile import Tile
 from player import Player
 from ui import UI
 from weapon import Weapon
 from enemy import Enemy
+from particles import AnimationPlayer
 
 
 class Level:
@@ -24,6 +25,9 @@ class Level:
 
         # user interface
         self.ui = UI()
+
+        # particles
+        self.animationPlayer = AnimationPlayer()
 
     def createMap(self):
         layouts = {
@@ -106,13 +110,27 @@ class Level:
     def playerAttackLogic(self):
         if self.attackSprites:
             for attackSprite in self.attackSprites:
-                collisionSprites = pygame.sprite.spritecollide(attackSprite, self.attackableSprites, False)
+                collisionSprites = pygame.sprite.spritecollide(
+                    attackSprite,
+                    self.attackableSprites,
+                    False
+                )
                 if collisionSprites:
                     for targetSprite in collisionSprites:
                         if targetSprite.spriteType == 'grass':
+                            position = targetSprite.rect.center
+                            offset = pygame.math.Vector2(0, 75)
+                            for _ in range(randint(3, 6)):
+                                self.animationPlayer.createGrassParticles(
+                                    position - offset,
+                                    [self.visibleSprites]
+                                )
                             targetSprite.kill()
                         else:
-                            targetSprite.getDamage(self.player, attackSprite.spriteType)
+                            targetSprite.getDamage(
+                                self.player,
+                                attackSprite.spriteType
+                            )
 
     def damagePlayer(self, ammount, attackType):
         if self.player.vulnerable:
