@@ -137,6 +137,9 @@ class Level:
             self.player.health -= ammount
             self.player.vulnerable = False
             self.player.hurtTime = pygame.time.get_ticks()
+            self.animationPlayer.createParticles(
+                attackType, self.player.rect.center, [self.visibleSprites]
+            )
 
     def run(self):
         self.visibleSprites.customDraw(self.player)

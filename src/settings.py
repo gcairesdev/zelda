@@ -36,5 +36,5 @@ ENEMY_DATA = {
     'squid': {'health': 100, 'exp': 100, 'damage': 20, 'attackType': 'slash', 'attackSound': './src/audio/attack/slash.wav', 'speed': 3, 'resistance': 3, 'attackRadius': 80, 'noticeRadius': 360},
     'raccoon': {'health': 300, 'exp': 250, 'damage': 40, 'attackType': 'claw', 'attackSound': './src/audio/attack/claw.wav', 'speed': 2, 'resistance': 3, 'attackRadius': 120, 'noticeRadius': 400},
     'spirit': {'health': 100, 'exp': 110, 'damage': 8, 'attackType': 'thunder', 'attackSound': './src/audio/attack/fireball.wav', 'speed': 4, 'resistance': 3, 'attackRadius': 60, 'noticeRadius': 350},
-    'bamboo': {'health': 70, 'exp': 120, 'damage': 6, 'attackType': 'lead_attack', 'attackSound': './src/audio/attack/slash.wav', 'speed': 3, 'resistance': 3, 'attackRadius': 50, 'noticeRadius': 300}
+    'bamboo': {'health': 70, 'exp': 120, 'damage': 6, 'attackType': 'leaf_attack', 'attackSound': './src/audio/attack/slash.wav', 'speed': 3, 'resistance': 3, 'attackRadius': 50, 'noticeRadius': 300}
 }
