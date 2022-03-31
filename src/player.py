@@ -180,9 +180,14 @@ class Player(Entity):
         weaponDamage = WEAPON_DATA[self.weapon]['damage']
         return baseDamage + weaponDamage
 
+    def energyRecovery(self):
+        if self.energy < self.stats['energy']:
+            self.energy += 0.01 * self.stats['magic']
+
     def update(self):
         self.input()
         self.cooldowns()
         self.setStatus()
         self.animate()
+        self.energyRecovery()
         self.move(self.speed)
