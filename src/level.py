@@ -105,6 +105,8 @@ class Level:
     def createMagic(self, name, strength, cost):
         if name == 'heal':
             self.magicPlayer.heal(self.player, strength, cost, [self.visibleSprites])
+        if name == 'flame':
+            self.magicPlayer.flame(self.player, strength, cost, [self.visibleSprites, self.attackSprites])
 
     def destroyAttack(self):
         if self.currentAttack:
