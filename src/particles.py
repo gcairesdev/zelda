@@ -69,7 +69,7 @@ class AnimationPlayer:
 class ParticleEffect(pygame.sprite.Sprite):
     def __init__(self, position, animationFrames, groups, animationSpeed=0.2):
         super().__init__(groups)
-        self.spritetype = 'magic'
+        self.spriteType = 'magic'
         self.frameIndex = 0
         self.animationSpeed = animationSpeed
         self.frames = animationFrames
