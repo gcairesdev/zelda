@@ -9,10 +9,12 @@ from weapon import Weapon
 from enemy import Enemy
 from particles import AnimationPlayer
 from magic import MagicPlayer
+from upgrade import Upgrade
 
 
 class Level:
     def __init__(self):
+        self.gamePaused = False
         self.displaySurface = pygame.display.get_surface()
         self.visibleSprites = YSortCameraGroup()
         self.obstaclesSprites = pygame.sprite.Group()
@@ -26,6 +28,7 @@ class Level:
 
         # user interface
         self.ui = UI()
+        self.upgrade = Upgrade(self.player)
 
         # particles
         self.animationPlayer = AnimationPlayer()
@@ -154,12 +157,19 @@ class Level:
     def addXP(self, ammount):
         self.player.exp += ammount
 
+    def toggleMenu(self):
+        self.gamePaused = not self.gamePaused
+
     def run(self):
         self.visibleSprites.customDraw(self.player)
-        self.visibleSprites.update()
-        self.visibleSprites.enemyUpdate(self.player)
-        self.playerAttackLogic()
         self.ui.display(self.player)
+
+        if self.gamePaused:
+            self.upgrade.display()
+        else:
+            self.visibleSprites.update()
+            self.visibleSprites.enemyUpdate(self.player)
+            self.playerAttackLogic()
 
 
 class YSortCameraGroup(pygame.sprite.Group):

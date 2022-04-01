@@ -34,6 +34,13 @@ class Player(Entity):
         self.magicSwitchTime = None
 
         # stats
+        self.maxStats = {
+            'health': 300,
+            'energy': 140,
+            'attack': 20,
+            'magic': 10,
+            'speed': 10
+        }
         self.stats = {
             'health': 100,
             'energy': 60,
@@ -195,6 +202,12 @@ class Player(Entity):
     def energyRecovery(self):
         if self.energy < self.stats['energy']:
             self.energy += 0.01 * self.stats['magic']
+
+    def getStatsValueByIndex(self, index):
+        return list(self.stats.values())[index]
+
+    def getCostByIndex(self, index):
+        return list(self.upgradeCost.values())[index]
 
     def update(self):
         self.input()
