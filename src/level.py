@@ -93,7 +93,8 @@ class Level:
                                     [self.visibleSprites, self.attackableSprites],
                                     self.obstaclesSprites,
                                     self.damagePlayer,
-                                    self.triggerDeathParticles
+                                    self.triggerDeathParticles,
+                                    self.addXP
                                 )
 
     def createAttack(self):
@@ -149,6 +150,9 @@ class Level:
 
     def triggerDeathParticles(self, name, position):
         self.animationPlayer.createParticles(name, position, self.visibleSprites)
+
+    def addXP(self, ammount):
+        self.player.exp += ammount
 
     def run(self):
         self.visibleSprites.customDraw(self.player)

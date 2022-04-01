@@ -5,7 +5,7 @@ from entity import Entity
 
 
 class Enemy(Entity):
-    def __init__(self, enemyName, position, groups, obstaclesSprites, damagePlayer, triggerDeathParticles):
+    def __init__(self, enemyName, position, groups, obstaclesSprites, damagePlayer, triggerDeathParticles, addXP):
         # general setup
         super().__init__(groups)
         self.spriteType = 'enemy'
@@ -38,6 +38,7 @@ class Enemy(Entity):
         self.attackCooldown = 400
         self.damagePlayer = damagePlayer
         self.triggerDeathParticles = triggerDeathParticles
+        self.addXP = addXP
 
         # invencibility timer
         self.vunarable = True
@@ -128,6 +129,7 @@ class Enemy(Entity):
     def checkDeath(self):
         if self.health <= 0:
             self.kill()
+            self.addXP(self.exp)
             self.triggerDeathParticles(self.enemyName, self.rect.center)
 
     def hitReaction(self):
