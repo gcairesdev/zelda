@@ -45,6 +45,14 @@ class Enemy(Entity):
         self.hitTime = None
         self.invencibilityCooldown = 300
 
+        # sounds
+        self.deathSound = pygame.mixer.Sound('./src/audio/death.wav')
+        self.hitSound = pygame.mixer.Sound('./src/audio/hit.wav')
+        self.attackSound = pygame.mixer.Sound(enemyInfo['attackSound'])
+        self.deathSound.set_volume(0.35)
+        self.hitSound.set_volume(0.2)
+        self.attackSound.set_volume(0.3)
+
     def importGraphics(self, name):
         self.animations = {'idle': [], 'move': [], 'attack': []}
         mainPath = f'./src/img/enemies/{name}/'
@@ -77,6 +85,7 @@ class Enemy(Entity):
 
     def actions(self, player):
         if self.status == 'attack':
+            self.attackSound.play()
             self.attackTime = pygame.time.get_ticks()
             self.damagePlayer(self.attackDamage, self.attackType)
         elif self.status == 'move':
@@ -115,6 +124,7 @@ class Enemy(Entity):
 
     def getDamage(self, player, attackType):
         if self.vunarable:
+            self.hitSound.play()
             self.direction = self.getPlayerDistanceAndDirection(player)[1]
             if attackType == 'weapon':
                 self.health -= player.getFullWeaponDamage()
@@ -130,6 +140,7 @@ class Enemy(Entity):
         if self.health <= 0:
             self.kill()
             self.addXP(self.exp)
+            self.deathSound.play()
             self.triggerDeathParticles(self.enemyName, self.rect.center)
 
     def hitReaction(self):

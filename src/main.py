@@ -12,6 +12,11 @@ class Game:
         self.clock = pygame.time.Clock()
         self.level = Level()
 
+        # sound
+        music = pygame.mixer.Sound('./src/audio/music.ogg')
+        music.set_volume(0.1)
+        music.play(loops=-1)
+
     def run(self):
         while True:
             for event in pygame.event.get():
