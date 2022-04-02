@@ -16,6 +16,7 @@ class Player(Entity):
         self.attackCooldown = 400
         self.atackTime = None
         self.obstaclesSprites = obstaclesSprites
+        self.dead = False
 
         # weapon
         self.createAttack = createAttack
@@ -214,6 +215,10 @@ class Player(Entity):
     def getCostByIndex(self, index):
         return list(self.upgradeCost.values())[index]
 
+    def checkDeath(self):
+        if self.health <= 0:
+            self.dead = True
+
     def update(self):
         self.input()
         self.cooldowns()
@@ -221,3 +226,4 @@ class Player(Entity):
         self.animate()
         self.energyRecovery()
         self.move(self.stats['speed'])
+        self.checkDeath()

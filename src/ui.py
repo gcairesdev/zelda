@@ -78,6 +78,18 @@ class UI:
 
         self.displaySurface.blit(magicSurf, magicRect)
 
+    def gameOver(self):
+        textSurf = self.font.render('Game Over', False, UI_TEXT_COLOR)
+        x = self.displaySurface.get_size()[0] // 2
+        y = self.displaySurface.get_size()[1] // 2
+        textRect = textSurf.get_rect(center=(x, y))
+
+        pygame.draw.rect(self.displaySurface, UI_BG_COLOR,
+                         textRect.inflate(250, 100))
+        self.displaySurface.blit(textSurf, textRect)
+        pygame.draw.rect(self.displaySurface, UI_BORDER_COLOR,
+                         textRect.inflate(250, 100), 3)
+
     def display(self, player):
         self.showBar(player.health, player.stats['health'],
                      self.healthBarRect, UI_HEALTH_COLOR)

@@ -170,6 +170,8 @@ class Level:
 
         if self.gamePaused:
             self.upgrade.display()
+        elif self.player.dead:
+            self.ui.gameOver()
         else:
             self.visibleSprites.update()
             self.visibleSprites.enemyUpdate(self.player)
