@@ -25,23 +25,91 @@ UPGRADE_BG_COLOR_SELECTED = '#EEEEEE'
 WATER_COLOR = '#71DDEE'
 
 WEAPON_DATA = {
-    'sword': {'cooldown': 100, 'damage': 15, 'graphic': './src/img/weapons/sword/full.png'},
-    'lance': {'cooldown': 400, 'damage': 30, 'graphic': './src/img/weapons/lance/full.png'},
-    'axe': {'cooldown': 300, 'damage': 20, 'graphic': './src/img/weapons/axe/full.png'},
-    'rapier': {'cooldown': 50, 'damage': 8, 'graphic': './src/img/weapons/rapier/full.png'},
-    'sai': {'cooldown': 80, 'damage': 10, 'graphic': './src/img/weapons/sai/full.png'}
+    'sword': {
+        'cooldown': 100,
+        'damage': 15,
+        'graphic': './src/img/weapons/sword/full.png'
+    },
+    'lance': {
+        'cooldown': 400,
+        'damage': 30,
+        'graphic': './src/img/weapons/lance/full.png'
+    },
+    'axe': {
+        'cooldown': 300,
+        'damage': 20,
+        'graphic': './src/img/weapons/axe/full.png'
+    },
+    'rapier': {
+        'cooldown': 50,
+        'damage': 8,
+        'graphic': './src/img/weapons/rapier/full.png'
+    },
+    'sai': {
+        'cooldown': 80,
+        'damage': 10,
+        'graphic': './src/img/weapons/sai/full.png'
+    }
 }
 
 MAGIC_DATA = {
-    'flame': {'strength': 5, 'cost': 20, 'graphic': './src/img/particles/flame/fire.png'},
-    'heal': {'strength': 20, 'cost': 10, 'graphic': './src/img/particles/heal/heal.png'}
+    'flame': {
+        'strength': 5,
+        'cost': 20,
+        'graphic': './src/img/particles/flame/fire.png'
+    },
+    'heal': {
+        'strength': 20,
+        'cost': 10,
+        'graphic': './src/img/particles/heal/heal.png'
+    }
 }
 
 ENEMY_DATA = {
-    'squid': {'health': 100, 'exp': 100, 'damage': 20, 'attackType': 'slash', 'attackSound': './src/audio/attack/slash.wav', 'speed': 3, 'resistance': 3, 'attackRadius': 80, 'noticeRadius': 360},
-    'raccoon': {'health': 300, 'exp': 250, 'damage': 40, 'attackType': 'claw', 'attackSound': './src/audio/attack/claw.wav', 'speed': 2, 'resistance': 3, 'attackRadius': 120, 'noticeRadius': 400},
-    'spirit': {'health': 100, 'exp': 110, 'damage': 8, 'attackType': 'thunder', 'attackSound': './src/audio/attack/fireball.wav', 'speed': 4, 'resistance': 3, 'attackRadius': 60, 'noticeRadius': 350},
-    'bamboo': {'health': 70, 'exp': 120, 'damage': 6, 'attackType': 'leaf_attack', 'attackSound': './src/audio/attack/slash.wav', 'speed': 3, 'resistance': 3, 'attackRadius': 50, 'noticeRadius': 300}
+    'squid': {
+        'health': 100,
+        'exp': 100,
+        'damage': 20,
+        'attackType': 'slash',
+        'attackSound': './src/audio/attack/slash.wav',
+        'speed': 3,
+        'resistance': 3,
+        'attackRadius': 80,
+        'noticeRadius': 360
+    },
+    'raccoon': {
+        'health': 300,
+        'exp': 250,
+        'damage': 40,
+        'attackType': 'claw',
+        'attackSound': './src/audio/attack/claw.wav',
+        'speed': 2,
+        'resistance': 3,
+        'attackRadius': 120,
+        'noticeRadius': 400
+    },
+    'spirit': {
+        'health': 100,
+        'exp': 110,
+        'damage': 8,
+        'attackType': 'thunder',
+        'attackSound': './src/audio/attack/fireball.wav',
+        'speed': 4,
+        'resistance': 3,
+        'attackRadius': 60,
+        'noticeRadius': 350
+    },
+    'bamboo': {
+        'health': 70,
+        'exp': 120,
+        'damage': 6,
+        'attackType': 'leaf_attack',
+        'attackSound': './src/audio/attack/slash.wav',
+        'speed': 3,
+        'resistance': 3,
+        'attackRadius': 50,
+        'noticeRadius': 300
+    }
 }
 
 HITBOX_OFFSET = {

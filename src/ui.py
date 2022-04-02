@@ -58,8 +58,8 @@ class UI:
         bgRect = pygame.Rect(left, top, UI_ITEM_BOX_SIZE, UI_ITEM_BOX_SIZE)
         pygame.draw.rect(self.displaySurface, UI_BG_COLOR, bgRect)
         if not hasSwitched:
-            pygame.draw.rect(self.displaySurface, UI_BORDER_COLOR_ACTIVE,
-                             bgRect, 3)
+            pygame.draw.rect(self.displaySurface,
+                             UI_BORDER_COLOR_ACTIVE, bgRect, 3)
         else:
             pygame.draw.rect(self.displaySurface, UI_BORDER_COLOR, bgRect, 3)
         return bgRect

@@ -66,7 +66,9 @@ class Upgrade:
             value = self.player.getStatsValueByIndex(index)
             maxValue = self.maxValues[index]
             cost = self.player.getCostByIndex(index)
-            item.display(self.displaySurface, self.selectionIndex, name, value, maxValue, cost)
+            item.display(self.displaySurface, self.selectionIndex,
+                         name, value, maxValue, cost)
+
 
 class Item:
     def __init__(self, left, top, width, height, index, font):
@@ -78,10 +80,12 @@ class Item:
         color = TEXT_COLOR_SELECTED if selected else UI_TEXT_COLOR
 
         titleSurface = self.font.render(name, False, color)
-        titleRect = titleSurface.get_rect(midtop=self.rect.midtop + pygame.math.Vector2(0, 20))
+        titleRect = titleSurface.get_rect(
+            midtop=self.rect.midtop + pygame.math.Vector2(0, 20))
 
         costSurface = self.font.render(f'{int(cost)}', False, color)
-        costRect = costSurface.get_rect(midbottom=self.rect.midbottom - pygame.math.Vector2(0, 20))
+        costRect = costSurface.get_rect(
+            midbottom=self.rect.midbottom - pygame.math.Vector2(0, 20))
 
         surface.blit(titleSurface, titleRect)
         surface.blit(costSurface, costRect)
@@ -93,7 +97,8 @@ class Item:
 
         fullHeight = bottom[1] - top[1]
         relativeNumber = (value / maxValue) * fullHeight
-        valueRect = pygame.Rect(top[0] - 15, bottom[1] - relativeNumber, 30, 10)
+        valueRect = pygame.Rect(
+            top[0] - 15, bottom[1] - relativeNumber, 30, 10)
 
         pygame.draw.line(surface, color, top, bottom, 5)
         pygame.draw.rect(surface, color, valueRect)
@@ -101,7 +106,7 @@ class Item:
     def trigger(self, player):
         upgradeAttribute = list(player.stats.keys())[self.index]
 
-        if player.exp >= player.upgradeCost[upgradeAttribute] and player.stats[upgradeAttribute] < player.maxStats[upgradeAttribute] :
+        if player.exp >= player.upgradeCost[upgradeAttribute] and player.stats[upgradeAttribute] < player.maxStats[upgradeAttribute]:
             player.exp -= player.upgradeCost[upgradeAttribute]
             player.stats[upgradeAttribute] *= 1.2
             player.upgradeCost[upgradeAttribute] *= 1.4

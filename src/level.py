@@ -58,18 +58,19 @@ class Level:
                             randomGrassImg = choice(graphics['grass'])
                             Tile(
                                 (x, y),
-                                [
-                                    self.visibleSprites,
-                                    self.obstaclesSprites,
-                                    self.attackableSprites
-                                ],
+                                [self.visibleSprites, self.obstaclesSprites,
+                                    self.attackableSprites],
                                 'grass',
                                 randomGrassImg
                             )
                         if style == 'object':
                             surface = graphics['objects'][int(col)]
                             Tile(
-                                (x, y), [self.visibleSprites, self.obstaclesSprites], 'object', surface)
+                                (x, y),
+                                [self.visibleSprites, self.obstaclesSprites],
+                                'object',
+                                surface
+                            )
                         if style == 'entities':
                             if col == '394':
                                 self.player = Player(
@@ -108,9 +109,11 @@ class Level:
 
     def createMagic(self, name, strength, cost):
         if name == 'heal':
-            self.magicPlayer.heal(self.player, strength, cost, [self.visibleSprites])
+            self.magicPlayer.heal(self.player, strength,
+                                  cost, [self.visibleSprites])
         if name == 'flame':
-            self.magicPlayer.flame(self.player, strength, cost, [self.visibleSprites, self.attackSprites])
+            self.magicPlayer.flame(self.player, strength, cost, [
+                                   self.visibleSprites, self.attackSprites])
 
     def destroyAttack(self):
         if self.currentAttack:
@@ -152,7 +155,8 @@ class Level:
             )
 
     def triggerDeathParticles(self, name, position):
-        self.animationPlayer.createParticles(name, position, self.visibleSprites)
+        self.animationPlayer.createParticles(
+            name, position, self.visibleSprites)
 
     def addXP(self, ammount):
         self.player.exp += ammount
