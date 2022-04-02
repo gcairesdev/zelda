@@ -57,7 +57,6 @@ class Player(Entity):
         }
         self.health = self.stats['health']
         self.energy = self.stats['energy']
-        self.speed = self.stats['speed']
         self.exp = 500
 
         # damage timer
@@ -215,4 +214,4 @@ class Player(Entity):
         self.setStatus()
         self.animate()
         self.energyRecovery()
-        self.move(self.speed)
+        self.move(self.stats['speed'])
