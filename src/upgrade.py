@@ -80,7 +80,7 @@ class Item:
         titleSurface = self.font.render(name, False, color)
         titleRect = titleSurface.get_rect(midtop=self.rect.midtop + pygame.math.Vector2(0, 20))
 
-        costSurface = self.font.render(str(cost), False, color)
+        costSurface = self.font.render(f'{int(cost)}', False, color)
         costRect = costSurface.get_rect(midbottom=self.rect.midbottom - pygame.math.Vector2(0, 20))
 
         surface.blit(titleSurface, titleRect)
