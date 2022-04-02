@@ -9,7 +9,7 @@ class Player(Entity):
         super().__init__(groups)
         self.image = pygame.image.load('./src/img/player.png').convert_alpha()
         self.rect = self.image.get_rect(topleft=position)
-        self.hitbox = self.rect.inflate(0, -26)
+        self.hitbox = self.rect.inflate(-6, HITBOX_OFFSET['player'])
         self.importPlayerAssets()
         self.status = 'down'
         self.attacking = False

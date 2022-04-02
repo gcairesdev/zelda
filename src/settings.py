@@ -43,3 +43,10 @@ ENEMY_DATA = {
     'spirit': {'health': 100, 'exp': 110, 'damage': 8, 'attackType': 'thunder', 'attackSound': './src/audio/attack/fireball.wav', 'speed': 4, 'resistance': 3, 'attackRadius': 60, 'noticeRadius': 350},
     'bamboo': {'health': 70, 'exp': 120, 'damage': 6, 'attackType': 'leaf_attack', 'attackSound': './src/audio/attack/slash.wav', 'speed': 3, 'resistance': 3, 'attackRadius': 50, 'noticeRadius': 300}
 }
+
+HITBOX_OFFSET = {
+    'player': -26,
+    'object': -40,
+    'grass': -10,
+    'invisible': 0,
+}
