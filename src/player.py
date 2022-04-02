@@ -83,34 +83,35 @@ class Player(Entity):
     def input(self):
         if not self.attacking:
             keys = pygame.key.get_pressed()
+            mouseKeys = pygame.mouse.get_pressed()
 
-            if keys[pygame.K_UP]:
+            if keys[pygame.K_UP] or keys[pygame.K_w]:
                 self.direction.y = -1
                 self.status = 'up'
-            elif keys[pygame.K_DOWN]:
+            elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
                 self.direction.y = 1
                 self.status = 'down'
             else:
                 self.direction.y = 0
 
-            if keys[pygame.K_LEFT]:
+            if keys[pygame.K_LEFT] or keys[pygame.K_a]:
                 self.direction.x = -1
                 self.status = 'left'
-            elif keys[pygame.K_RIGHT]:
+            elif keys[pygame.K_RIGHT] or keys[pygame.K_d]:
                 self.direction.x = 1
                 self.status = 'right'
             else:
                 self.direction.x = 0
 
             # weapon input
-            if keys[pygame.K_SPACE]:
+            if keys[pygame.K_j] or mouseKeys[0]:
                 self.attacking = True
                 self.atackTime = pygame.time.get_ticks()
                 self.createAttack()
                 self.weaponAttackSound.play()
 
             # magic input
-            if keys[pygame.K_LCTRL]:
+            if keys[pygame.K_k] or mouseKeys[2]:
                 self.attacking = True
                 self.atackTime = pygame.time.get_ticks()
                 style = list(MAGIC_DATA.keys())[self.magicIndex]
@@ -119,7 +120,7 @@ class Player(Entity):
                 cost = list(MAGIC_DATA.values())[self.magicIndex]['cost']
                 self.createMagic(style, strength, cost)
 
-            if keys[pygame.K_q] and self.canSwitchWeapon:
+            if (keys[pygame.K_u] or keys[pygame.K_q]) and self.canSwitchWeapon:
                 self.canSwitchWeapon = False
                 self.weaponSwitchTime = pygame.time.get_ticks()
 
@@ -130,7 +131,7 @@ class Player(Entity):
 
                 self.weapon = list(WEAPON_DATA.keys())[self.weaponIndex]
 
-            if keys[pygame.K_e] and self.canSwitchMagic:
+            if (keys[pygame.K_i] or keys[pygame.K_e]) and self.canSwitchMagic:
                 self.canSwitchMagic = False
                 self.magicSwitchTime = pygame.time.get_ticks()
 

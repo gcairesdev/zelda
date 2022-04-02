@@ -26,16 +26,16 @@ class Upgrade:
         keys = pygame.key.get_pressed()
 
         if self.canMove:
-            if keys[pygame.K_RIGHT] and self.selectionIndex < self.totalAtributtes - 1:
+            if (keys[pygame.K_d] or keys[pygame.K_RIGHT]) and self.selectionIndex < self.totalAtributtes - 1:
                 self.selectionIndex += 1
                 self.canMove = False
                 self.selectionTime = pygame.time.get_ticks()
-            if keys[pygame.K_LEFT] and self.selectionIndex >= 1:
+            if (keys[pygame.K_a] or keys[pygame.K_LEFT]) and self.selectionIndex >= 1:
                 self.selectionIndex -= 1
                 self.canMove = False
                 self.selectionTime = pygame.time.get_ticks()
 
-            if keys[pygame.K_SPACE]:
+            if keys[pygame.K_SPACE] or keys[pygame.K_RETURN]:
                 self.canMove = False
                 self.selectionTime = pygame.time.get_ticks()
                 self.itemList[self.selectionIndex].trigger(self.player)
