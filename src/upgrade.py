@@ -35,9 +35,9 @@ class Upgrade:
                 self.canMove = False
                 self.selectionTime = pygame.time.get_ticks()
 
-        if keys[pygame.K_SPACE]:
-            self.canMove = False
-            self.selectionTime = pygame.time.get_ticks()
+            if keys[pygame.K_SPACE]:
+                self.canMove = False
+                self.selectionTime = pygame.time.get_ticks()
 
     def selectionCooldown(self):
         if not self.canMove:
