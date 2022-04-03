@@ -46,8 +46,8 @@ class Enemy(Entity):
         self.invencibilityCooldown = 300
 
         # sounds
-        self.deathSound = pygame.mixer.Sound('./src/audio/death.wav')
-        self.hitSound = pygame.mixer.Sound('./src/audio/hit.wav')
+        self.deathSound = pygame.mixer.Sound(resourcePath('src/audio/death.wav'))
+        self.hitSound = pygame.mixer.Sound(resourcePath('src/audio/hit.wav'))
         self.attackSound = pygame.mixer.Sound(enemyInfo['attackSound'])
         self.deathSound.set_volume(0.35)
         self.hitSound.set_volume(0.2)
@@ -55,7 +55,7 @@ class Enemy(Entity):
 
     def importGraphics(self, name):
         self.animations = {'idle': [], 'move': [], 'attack': []}
-        mainPath = f'./src/img/enemies/{name}/'
+        mainPath = resourcePath(f'src/img/enemies/{name}/')
         for animation in self.animations.keys():
             self.animations[animation] = importImagesFrom(mainPath + animation)
 

@@ -1,3 +1,5 @@
+from support import *
+
 FPS = 60
 TILE_SIZE = 64
 TITLE = 'Zelda Pygame'
@@ -6,7 +8,7 @@ UI_BAR_HEIGHT = 20
 UI_HEALTH_BAR_WIDTH = 200
 UI_ENERGY_BAR_WIDTH = 140
 UI_ITEM_BOX_SIZE = 80
-UI_FONT = './src/font/joystix.ttf'
+UI_FONT = resourcePath('src/font/joystix.ttf')
 UI_FONT_SIZE = 18
 UI_TEXT_COLOR = '#EEEEEE'
 UI_BG_COLOR = '#222222'
@@ -26,27 +28,27 @@ WEAPON_DATA = {
     'sword': {
         'cooldown': 100,
         'damage': 15,
-        'graphic': './src/img/weapons/sword/full.png'
+        'graphic': resourcePath('src/img/weapons/sword/full.png')
     },
     'lance': {
         'cooldown': 400,
         'damage': 30,
-        'graphic': './src/img/weapons/lance/full.png'
+        'graphic': resourcePath('src/img/weapons/lance/full.png')
     },
     'axe': {
         'cooldown': 300,
         'damage': 20,
-        'graphic': './src/img/weapons/axe/full.png'
+        'graphic': resourcePath('src/img/weapons/axe/full.png')
     },
     'rapier': {
         'cooldown': 50,
         'damage': 8,
-        'graphic': './src/img/weapons/rapier/full.png'
+        'graphic': resourcePath('src/img/weapons/rapier/full.png')
     },
     'sai': {
         'cooldown': 80,
         'damage': 10,
-        'graphic': './src/img/weapons/sai/full.png'
+        'graphic': resourcePath('src/img/weapons/sai/full.png')
     }
 }
 
@@ -54,12 +56,12 @@ MAGIC_DATA = {
     'flame': {
         'strength': 5,
         'cost': 20,
-        'graphic': './src/img/particles/flame/fire.png'
+        'graphic': resourcePath('src/img/particles/flame/fire.png')
     },
     'heal': {
         'strength': 20,
         'cost': 10,
-        'graphic': './src/img/particles/heal/heal.png'
+        'graphic': resourcePath('src/img/particles/heal/heal.png')
     }
 }
 
@@ -69,7 +71,7 @@ ENEMY_DATA = {
         'exp': 100,
         'damage': 20,
         'attackType': 'slash',
-        'attackSound': './src/audio/attack/slash.wav',
+        'attackSound': resourcePath('src/audio/attack/slash.wav'),
         'speed': 3,
         'resistance': 3,
         'attackRadius': 80,
@@ -80,7 +82,7 @@ ENEMY_DATA = {
         'exp': 250,
         'damage': 40,
         'attackType': 'claw',
-        'attackSound': './src/audio/attack/claw.wav',
+        'attackSound': resourcePath('src/audio/attack/claw.wav'),
         'speed': 2,
         'resistance': 3,
         'attackRadius': 120,
@@ -91,7 +93,7 @@ ENEMY_DATA = {
         'exp': 110,
         'damage': 8,
         'attackType': 'thunder',
-        'attackSound': './src/audio/attack/fireball.wav',
+        'attackSound': resourcePath('src/audio/attack/fireball.wav'),
         'speed': 4,
         'resistance': 3,
         'attackRadius': 60,
@@ -102,7 +104,7 @@ ENEMY_DATA = {
         'exp': 120,
         'damage': 6,
         'attackType': 'leaf_attack',
-        'attackSound': './src/audio/attack/slash.wav',
+        'attackSound': resourcePath('src/audio/attack/slash.wav'),
         'speed': 3,
         'resistance': 3,
         'attackRadius': 50,

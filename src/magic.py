@@ -1,5 +1,6 @@
 import pygame
 from settings import *
+from support import *
 from random import randint
 
 
@@ -7,8 +8,8 @@ class MagicPlayer():
     def __init__(self, animationPlayer):
         self.animationPlayer = animationPlayer
         self.sounds = {
-            'heal': pygame.mixer.Sound('./src/audio/heal.wav'),
-            'flame': pygame.mixer.Sound('./src/audio/flame.wav')
+            'heal': pygame.mixer.Sound(resourcePath('src/audio/heal.wav')),
+            'flame': pygame.mixer.Sound(resourcePath('src/audio/flame.wav'))
         }
 
     def heal(self, player, strength, cost, groups):

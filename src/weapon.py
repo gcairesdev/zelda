@@ -1,4 +1,5 @@
 import pygame
+from support import *
 
 
 class Weapon(pygame.sprite.Sprite):
@@ -8,8 +9,9 @@ class Weapon(pygame.sprite.Sprite):
         direction = player.status.split('_')[0]
 
         # graphic
-        fullPath = f'./src/img/weapons/{player.weapon}/{direction}.png'
-        self.image = pygame.image.load(fullPath).convert_alpha()
+        fullPath = f'src/img/weapons/{player.weapon}/{direction}.png'
+        assetUrl = resourcePath(fullPath)
+        self.image = pygame.image.load(assetUrl).convert_alpha()
 
         # placement
         if direction == 'right':

@@ -7,7 +7,8 @@ from settings import *
 class Player(Entity):
     def __init__(self, position, groups, obstaclesSprites, createAttack, destroyAttack, createMagic):
         super().__init__(groups)
-        self.image = pygame.image.load('./src/img/player.png').convert_alpha()
+        assetUrl = resourcePath('src/img/player.png')
+        self.image = pygame.image.load(assetUrl).convert_alpha()
         self.rect = self.image.get_rect(topleft=position)
         self.hitbox = self.rect.inflate(-6, HITBOX_OFFSET['player'])
         self.importPlayerAssets()
@@ -66,11 +67,11 @@ class Player(Entity):
         self.invunerabilityDuration = 500
 
         # import a sound
-        self.weaponAttackSound = pygame.mixer.Sound('./src/audio/sword.wav')
+        self.weaponAttackSound = pygame.mixer.Sound(resourcePath('src/audio/sword.wav'))
         self.weaponAttackSound.set_volume(0.2)
 
     def importPlayerAssets(self):
-        characterPath = './src/img/player/'
+        characterPath = 'src/img/player/'
         self.animations = {
             'up': [], 'down': [], 'left': [], 'right': [],
             'right_idle': [], 'left_idle': [], 'up_idle': [], 'down_idle': [],
@@ -78,7 +79,7 @@ class Player(Entity):
         }
 
         for animation in self.animations.keys():
-            fullPath = characterPath + animation
+            fullPath = resourcePath(characterPath + animation)
             self.animations[animation] = importImagesFrom(fullPath)
 
     def input(self):

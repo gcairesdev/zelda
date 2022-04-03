@@ -1,5 +1,6 @@
 import pygame
 from settings import *
+from support import *
 
 
 class UI:
@@ -18,14 +19,16 @@ class UI:
         self.weaponGraphics = []
         for weapon in WEAPON_DATA.values():
             path = weapon['graphic']
-            weapon = pygame.image.load(path).convert_alpha()
+            assetUrl = resourcePath(path)
+            weapon = pygame.image.load(assetUrl).convert_alpha()
             self.weaponGraphics.append(weapon)
 
         # convert magic dictionary
         self.magicGraphics = []
         for magic in MAGIC_DATA.values():
             path = magic['graphic']
-            magic = pygame.image.load(path).convert_alpha()
+            assetUrl = resourcePath(path)
+            magic = pygame.image.load(assetUrl).convert_alpha()
             self.magicGraphics.append(magic)
 
     def showBar(self, current, maxAmount, bgRect, color):
